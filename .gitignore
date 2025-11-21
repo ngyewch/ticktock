@@ -50,3 +50,6 @@ CTestTestfile.cmake
 _CPack_Packages/
 
 build/
+
+# Taskfile
+.task/
