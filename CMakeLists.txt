@@ -194,6 +194,16 @@ target_link_libraries(single_client_tcp
 
 ####
 
+add_executable(tt_env
+        tools/tt_env.cpp
+)
+
+target_link_libraries(tt_env
+        ttlib
+)
+
+####
+
 add_executable(all_tests
         test/all_tests.cpp
 
