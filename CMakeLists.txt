@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
 
-project(tt)
+project(ticktock)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -12,13 +12,29 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+execute_process(
+        COMMAND git rev-parse --abbrev-ref HEAD
+        OUTPUT_VARIABLE BRANCH
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+execute_process(
+        COMMAND git rev-parse --short HEAD
+        OUTPUT_VARIABLE COMMIT
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+execute_process(
+        COMMAND date +%s
+        OUTPUT_VARIABLE CTIME
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
 find_package(Threads REQUIRED)
 find_package(ZLIB REQUIRED)
 
 add_definitions(
-        -DTT_BRANCH="$ENV{BRANCH}"
-        -DTT_COMMIT="$ENV{COMMIT}"
-        -DCOMPILE_TIME=$ENV{CTIME}
+        -DTT_BRANCH="${BRANCH}"
+        -DTT_COMMIT="${COMMIT}"
+        -DCOMPILE_TIME=${CTIME}
 )
 
 add_compile_options(
