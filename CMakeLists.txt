@@ -109,6 +109,7 @@ add_executable(append
 
 target_link_libraries(append
         ttlib
+        Threads::Threads
 )
 
 ####
@@ -140,6 +141,7 @@ add_executable(client_tcp
 
 target_link_libraries(client_tcp
         ttlib
+        Threads::Threads
 )
 
 ####
@@ -150,6 +152,7 @@ add_executable(inspect
 
 target_link_libraries(inspect
         ttlib
+        Threads::Threads
 )
 
 ####
@@ -160,6 +163,7 @@ add_executable(iobench
 
 target_link_libraries(iobench
         ttlib
+        Threads::Threads
 )
 
 ####
@@ -194,4 +198,5 @@ target_include_directories(all_tests PRIVATE test/include)
 
 target_link_libraries(all_tests
         ttlib
+        Threads::Threads
 )
