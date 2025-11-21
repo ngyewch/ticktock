@@ -1,0 +1,15 @@
+version: 3
+
+tasks:
+  build:
+    desc: Build
+    cmds:
+      - cmake -S .
+      - make
+    env:
+      BRANCH:
+        sh: git rev-parse --abbrev-ref HEAD
+      COMMIT:
+        sh: git rev-parse --short HEAD
+      CTIME:
+        sh: date +%s
