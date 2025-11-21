@@ -13,3 +13,8 @@ tasks:
         sh: git rev-parse --short HEAD
       CTIME:
         sh: date +%s
+
+  build-via-earthly:
+    desc: Build via earthly
+    cmds:
+      - earthly --artifact +build/build build

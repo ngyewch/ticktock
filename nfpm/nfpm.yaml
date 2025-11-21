@@ -1,0 +1,38 @@
+name: ticktock
+arch: ${TARGET_ARCH}
+version: ${TICKTOCK_VERSION}
+priority: optional
+maintainer: Nick Ng <ngyewch@gmail.com>
+description: |
+  TickTockDB is an OpenTSDB-like time series database, with much better performance.
+homepage: https://github.com/ytyou/ticktock
+license: GPL-3.0
+
+contents:
+  - src: ../bin/tt
+    dst: /opt/ticktock/bin/tt
+  - src: ../bin/append
+    dst: /opt/ticktock/bin/append
+  - src: ../bin/backfill
+    dst: /opt/ticktock/bin/backfill
+  - src: ../bin/client_http
+    dst: /opt/ticktock/bin/client_http
+  - src: ../bin/client_tcp
+    dst: /opt/ticktock/bin/client_tcp
+  - src: ../bin/inspect
+    dst: /opt/ticktock/bin/inspect
+  - src: ../bin/iobench
+    dst: /opt/ticktock/bin/iobench
+  - src: ../bin/single_client_tcp
+    dst: /opt/ticktock/bin/single_client_tcp
+  - src: /opt/ticktock/bin/tt
+    dst: /usr/bin/tt
+    type: symlink
+  - src: contents
+    dst: /
+    type: tree
+scripts:
+  preinstall: scripts/preinstall.sh
+  postinstall: scripts/postinstall.sh
+  preremove: scripts/preremove.sh
+  postremove: scripts/postremove.sh
