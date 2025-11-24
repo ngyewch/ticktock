@@ -108,3 +108,23 @@ build-armhf:
     RUN nfpm package -p deb -t build/ticktock_${TICKTOCK_VERSION}_${TARGET_ARCH}.deb
     RUN nfpm package -p rpm -t build/ticktock_${TICKTOCK_VERSION}_${TARGET_ARCH}.rpm
     SAVE ARTIFACT build
+
+build-docker:
+    FROM bitnami/minideb:latest
+
+    COPY +build-amd64/bin/tt /usr/bin/tt
+    COPY +build-amd64/bin/tt_env /usr/bin/tt_env
+
+    EXPOSE 6180/tcp
+    EXPOSE 6181/tcp
+    EXPOSE 6181/udp
+    EXPOSE 6182/tcp
+    EXPOSE 6183/tcp
+
+    COPY ./docker/limits.conf /etc/security/
+    RUN mkdir -p /opt/ticktock/scripts
+    COPY ./docker/docker-entrypoint.sh /opt/ticktock/scripts/
+
+    ENTRYPOINT ["/opt/ticktock/scripts/docker-entrypoint.sh"]
+
+    SAVE IMAGE ticktock:latest
