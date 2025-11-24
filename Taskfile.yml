@@ -20,3 +20,12 @@ tasks:
     desc: Build via earthly
     cmds:
       - earthly --artifact +build/build build
+
+  build-docker:
+    cmds:
+      - earthly +build-docker
+
+  run-docker:
+    deps: [ build-docker ]
+    cmds:
+      - docker run --rm -it -p 6182:6182 ticktock:latest
